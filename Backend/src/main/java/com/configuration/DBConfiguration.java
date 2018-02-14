@@ -7,13 +7,17 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.model.User;
+
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages="com")
 public class DBConfiguration 
 {
   public DBConfiguration()
@@ -30,7 +34,7 @@ public class DBConfiguration
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.setProperty("hibernate.show_sql", "true");
 		lsf.addProperties(hibernateProperties);
-		Class classes[]=new Class[]{};//class objects of all entities
+		Class classes[]=new Class[]{User.class};//class objects of all entities
 	    return lsf.addAnnotatedClasses(classes).buildSessionFactory();
 	}
 	@Bean
@@ -38,8 +42,8 @@ public class DBConfiguration
 	    BasicDataSource dataSource = new BasicDataSource();
 	    dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
 	    dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-	    dataSource.setUsername("test");
-	    dataSource.setPassword("admin123");
+	    dataSource.setUsername("TESTS");
+	    dataSource.setPassword("tests");
 	    return dataSource;
 	    
 	}

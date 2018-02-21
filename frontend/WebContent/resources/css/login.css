@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+.error{
+	padding:15px;
+	margin-bottom:20px;
+	border:1px solid transparent;
+	border-radius:4px;
+	color: red;
+	background-color:pink;
+	border-color:black;
+}
+.msg{
+	padding:15px;
+	margin-bottom:20px;
+	border:1px solid transparent;
+	border-radius:4px;
+	color: blue;
+	background-color:silver;
+	border-color:black;
+}
+.login-box{
+	padding:300px;
+	margin-bottom:20px;
+	border:1px solid transparent;
+	border-radius:4px;
+	color: purple;
+	background-color:silver;
+	border-color:black;
+}

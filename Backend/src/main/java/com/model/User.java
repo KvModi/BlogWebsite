@@ -64,6 +64,11 @@ public class User
 		this.online = online;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "email: "+this.email+", name: "+this.firstname+" "+this.lastname+", password :"+this.password+", phone: "+this.phonenumber+", role : "+this.role;
+	}
 	
 	
 }

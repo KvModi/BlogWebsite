@@ -25,4 +25,30 @@ app.controller('UserController',function($scope,$rootScope,$location,UserService
 			
 		})
 	}
+	if($rootScope.loggedInUser!=undefined){
+	UserService.getUser().then(
+		function(response){
+			$scope.user=response.data
+		},
+		function(response){
+			if(response.status==401)
+				$location.path('/login')
+			else
+				$scope.error=response.data;
+		})
+		}
+	$scope.updateUser=function(user){
+		UserService.updateUser(user).then(function(response){
+			
+			alert('User Profile Updated Successfully!')
+			$rootScope.loggedInUser=response.data
+			$cookieStore.put('loggedInUser',response.data)
+			$location.path('/home')
+		},function(response){
+			if(response.status==401)
+				$location.path('/login')
+			else
+				$scope.error=response.data;
+		})
+	}
 })

@@ -5,9 +5,11 @@
 <title>Ask Away</title>
 </head>
 <body>
-<marquee><h1 align="center" style="text-shadow: fuchsia;">Ask Away</h1></marquee>
+<marquee width="80%" style="visibility: visible;align-content: center;display: block;clip: auto;"><h1 align="center"  style="text-shadow: black; color: blue;" >Ask Away</h1></marquee>
 <p> Your basic, simple, stupid or smart. Any question will be answered by the professional of that field.
 To Ask Away
+<p ng-show="loggedInUser.firstname==undefined">
 Please <a href="#/login">Login</a> or <a href="#/register">Sign Up</a>
+</p>
 </body>
 </html>

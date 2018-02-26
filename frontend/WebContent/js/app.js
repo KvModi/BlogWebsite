@@ -16,6 +16,16 @@ app.config(function($routeProvider) {
 		templateUrl:'views/home.html',
 		controller:'UserController'
 	})
+	
+	.when('/edituserprofile',{
+		templateUrl:'views/jobform.html',
+		controller:'JobCtrl'
+	})
+	
+	.when('/addjob',{
+		templateUrl:'views/edituserprofile.html',
+		controller:'UserController'
+	})
 	.otherwise({
 		templateUrl:'views/home.html'
 	})
@@ -31,10 +41,12 @@ app.run(function ($location,$rootScope,$cookieStore,UserService){
 			delete $rootScope.loggedInUser;
 			$cookieStore.remove('currentuser')
 			$rootScope.message="SuccessFull Logout"
+				alert('Logout Successful. Please Login to Continue')
 				$location.path="/login"
 		},function(response){
 			if(response.status=401)
 				$location.path=('/login')
+				
 		})
 	}
 })

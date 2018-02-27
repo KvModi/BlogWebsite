@@ -17,12 +17,12 @@ app.config(function($routeProvider) {
 		controller:'UserController'
 	})
 	
-	.when('/edituserprofile',{
+	.when('/addjob',{
 		templateUrl:'views/jobform.html',
 		controller:'JobCtrl'
 	})
 	
-	.when('/addjob',{
+	.when('/edituserprofile',{
 		templateUrl:'views/edituserprofile.html',
 		controller:'UserController'
 	})

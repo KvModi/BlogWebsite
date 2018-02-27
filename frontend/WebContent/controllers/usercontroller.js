@@ -1,5 +1,5 @@
 /**
- * 
+ * usercontroller
  */
 app.controller('UserController',function($scope,$rootScope,$location,UserService){
 	$scope.registerUser=function(user){
@@ -48,7 +48,22 @@ app.controller('UserController',function($scope,$rootScope,$location,UserService
 			if(response.status==401)
 				$location.path('/login')
 			else
-				$scope.error=response.data;
+				$scope.error=response.data
+		})
+	}
+	//view  to controller
+	$scope.updateUser=function(user){
+		UserService.updateUser(user).then(function(response){
+			alert('updated user details')
+			$rootScope.loggedInUser=response.data
+			$cookieStore.put('loggedInUser',response.data)
+				$location.path('/home')
+		},function(response){
+			if(response.status==401)
+				$location.path('/login')
+			else
+				$scope.error=response.data
+			
 		})
 	}
 })

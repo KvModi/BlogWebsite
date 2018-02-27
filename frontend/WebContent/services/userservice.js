@@ -19,7 +19,8 @@ app.factory('UserService',function($http){
 	userService.getUser=function(){
 		return $http.get("http://localhost:8081/middleware/getuser")
 	}
-	userService.updateUser=function(){
+	userService.updateUser=function(user){
+		console.log('updateUser  ')
 		return $http.put("http://localhost:8081/middleware/updateuser",user)
 	}
 	return userService;

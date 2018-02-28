@@ -1,10 +1,13 @@
 package com.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,7 @@ public class Job
 	private int id;
 	@Column(nullable=false)
 	private String jobTitle;
+	@Lob
 	private String jobDescription;
 	@Column(nullable=false)
 	private String skillsRequired;
@@ -24,6 +28,7 @@ public class Job
 	private String yrsOfExp;
 	private String companyName;
 	private String salary;
+	private Date postedOn;
 	public int getId() {
 		return id;
 	}
@@ -71,6 +76,12 @@ public class Job
 	}
 	public void setSalary(String salary) {
 		this.salary = salary;
+	}
+	public Date getPostedOn() {
+		return postedOn;
+	}
+	public void setPostedOn(Date postedOn) {
+		this.postedOn = postedOn;
 	}
 	
 	

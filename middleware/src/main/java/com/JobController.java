@@ -19,16 +19,17 @@ import com.model.*;
 public class JobController {
 
 	@Autowired
-	private UserDao userDao;
+/*	private */UserDao userDao;
 	
 	@Autowired
-	private JobDao jobDao;
+	/*private*/ JobDao jobDao;
+	
 	
 	@RequestMapping(value="/addjob", method=RequestMethod.POST)
 	public ResponseEntity<?> addJob(@RequestBody Job job, HttpSession session){
 	
-		/*String email="admin@gmail.com";*/
-		String email=(String)session.getAttribute("loginId");
+		/*String email="admin@gmail.com";
+*/		String email=(String)session.getAttribute("loginId");
 		if(email==null) {
 			ErrorClazz error=new ErrorClazz(4, "Unauthorised access");
 			return new ResponseEntity<ErrorClazz> (error, HttpStatus.UNAUTHORIZED);			

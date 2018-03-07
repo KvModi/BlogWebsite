@@ -54,7 +54,8 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody User user, HttpSession session){
-		System.out.println(user);
+		
+		System.out.println("UserController : /login : user="+user);
 		User validUser=userDao.login(user);
 		System.out.println(validUser);
 		if(validUser==null) {
@@ -104,6 +105,7 @@ public class UserController {
 		System.out.println("UserController: getUser:User user=userDao.getUser(email);");
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
+	
 	@RequestMapping(value="/updateuser", method=RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@RequestBody User user,HttpSession session){
 		String email=(String)session.getAttribute("loginId");

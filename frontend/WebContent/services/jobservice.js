@@ -8,8 +8,11 @@ app.factory('JobService',function($http){
 		return $http.post("http://localhost:8081/middleware/addjob",job)
 	}
 	
-	jobService.getAllJObs=function(){
+	jobService.getAllJobs=function(){
 		return $http.get("http://localhost:8081/middleware/alljobs"); 
+	}
+	jobService.getJob=function(id){
+		return $http.get("http://localhost:8081/middleware/getjob/"+id); 
 	}
 	return jobService;
 })

@@ -23,13 +23,12 @@ app.controller('JobCtrl',function($scope,$rootScope,$location,JobService, $route
 		$scope.jobs=response.data
 	},function(response){
 		$rootScope.error=response.data
-		console.log('jobcontroller : addition job NOT successful')
 		if(response.status==401)
 			$location.path('/login')
-			alert('something is not right ')
-	})
+			alert('something is not right ')})
 	
-	JobService.getJob(id).then(function(response){
+			if(id!=undefined){
+		JobService.getJob(id).then(function(response){
 		$scope.job=response.data
 	},function(response){
 		$rootScope.error=response.data
@@ -37,5 +36,7 @@ app.controller('JobCtrl',function($scope,$rootScope,$location,JobService, $route
 		if(response.status==401)
 			$location.path('/login')
 			alert('something is not right ')
-	})
+	}) }
+	
 })
+	

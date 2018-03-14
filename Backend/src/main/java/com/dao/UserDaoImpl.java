@@ -10,19 +10,21 @@ import org.springframework.stereotype.Repository;
 
 import com.model.User;
 
-@Repository
+@Repository("userDao")
 @Transactional
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory ;
+	
 	public UserDaoImpl() {
 		System.out.println("user dao impl bean is created");
 	}
 	public void registerUser(User user) {
 		System.out.println("register user in daoimpl");
 		Session session= sessionFactory.getCurrentSession();
-		session.save(user);
+		/*session.save(user);*/
+		session.persist(user);
 
 	}
 	public boolean isEmailUnique(String email) {
@@ -34,6 +36,7 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 	public User login(User user) {
+		System.out.println("Entering in UserDaoImpl : Login");
 		Session session=sessionFactory.getCurrentSession()				;
 		Query query=session.createQuery("from User where email=? and password=?");
 		query.setString(0, user.getEmail());

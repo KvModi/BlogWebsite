@@ -18,7 +18,7 @@ import com.model.User;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages="com")
+@ComponentScan(basePackages="com.*")
 public class DBConfiguration 
 {
   public DBConfiguration()
@@ -28,28 +28,37 @@ public class DBConfiguration
   
   	@Bean
 	public SessionFactory sessionFactory() {
+  		System.out.println("DBConfiguration : sessionFactory entry ");
 		LocalSessionFactoryBuilder lsf=	new LocalSessionFactoryBuilder(getDataSource());
 		Properties hibernateProperties=new Properties();
+		System.out.println("DBConfiguration :sessionFactory : lsf and prop creation ");
 		hibernateProperties.setProperty(
 				"hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.setProperty("hibernate.show_sql", "true");
 		lsf.addProperties(hibernateProperties);
-		Class classes[]=new Class[]{User.class, Job.class};//class objects of all entities
-	    return lsf.addAnnotatedClasses(classes).buildSessionFactory();
+		System.out.println("DBConfiguration : sessionFactory: added properties ");
+		//Class classes[]=new Class[]{User.class,Job.class};//class objects of all entities
+		System.out.println("DBConfiguration :sessionFactory : exit ");
+		lsf.scanPackages("com.*");
+	    return lsf.buildSessionFactory();
+	}
+  	@Bean
+	public HibernateTransactionManager hibTransManagement(SessionFactory sessionFactory){
+		System.out.println("hibernate transaction manager class called");
+		return new HibernateTransactionManager(sessionFactory);
 	}
 	@Bean
 	public DataSource getDataSource() {
+		System.out.println("DBConfiguration : getDataSource entry");
 	    BasicDataSource dataSource = new BasicDataSource();
 	    dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-	    dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+	    dataSource.setUrl("jdbc:oracle:thin:@localhost:1521/XE");
 	    dataSource.setUsername("TESTS");
 	    dataSource.setPassword("tests");
+	    System.out.println("DBConfiguration : getDataSource exit");
 	    return dataSource;
 	    
 	}
-	@Bean
-	public HibernateTransactionManager hibTransManagement(){
-		return new HibernateTransactionManager(sessionFactory());
-	}
+	
 }

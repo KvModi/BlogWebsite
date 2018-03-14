@@ -18,13 +18,13 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
 		@Override
 		protected Class<?>[] getServletConfigClasses() {
-			// TODO Auto-generated method stub
+		
 			return new Class[]{WebAppConfig.class};
 		}
 
 		@Override
 		protected String[] getServletMappings() {
-			// TODO Auto-generated method stub
+			
 			return new String[]{"/"};// <url-pattern>/</url-pattern> Any requests,it will forwarded to DispatcherServlet
 		}
 

@@ -1,11 +1,11 @@
 package com;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dao.*;
-import com.model.*;
+import com.dao.JobDao;
+import com.dao.UserDao;
+import com.model.ErrorClazz;
+import com.model.Job;
+import com.model.User;
+
 @Controller
+@ComponentScan("com.*")
 public class JobController {
 
 	@Autowired
-/*	private */UserDao userDao;
+	UserDao userDao;
 	
 	@Autowired
-	/*private*/ JobDao jobDao;
+	JobDao jobDao;
 	
 	
 	@RequestMapping(value="/addjob", method=RequestMethod.POST)
@@ -56,7 +61,7 @@ public class JobController {
 		}
 		
 	}
-	@RequestMapping(value="/alljobs", method= RequestMethod.GET)
+	/*@RequestMapping(value="/alljobs", method= RequestMethod.GET)
 	public ResponseEntity<?> getAllJobs(HttpSession session){
 		String email=(String)session.getAttribute("loginId");
 		if(email==null) {
@@ -66,6 +71,6 @@ public class JobController {
 		
 		List<Job> jobs=jobDao.getAllJobs();
 		return new ResponseEntity<List<Job>>(jobs,HttpStatus.OK);
-	}
+	}*/
 	
 }

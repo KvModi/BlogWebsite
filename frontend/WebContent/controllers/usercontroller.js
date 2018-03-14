@@ -1,10 +1,12 @@
 /**
  * usercontroller
  */
-app.controller('UserController',function($scope,$rootScope,$location,UserService){
+app.controller('UserController',function($scope,$rootScope,$location,UserService,$cookieStore){
 	$scope.registerUser=function(user){
-		UserService.registerUser(user).then(function(response){//success
-			alert(' \n EMAIL ID: '+user.email+'\n PASSWORD: '+user.password+'\n PHONE NUMBER: '+user.phone)
+		console.log('usercontroller : registerUser')
+		UserService.registerUser(user).then(
+				function(response){//success
+			alert(' \n EMAIL ID: '+user.email+'\n PASSWORD: '+user.password)
 			alert('Registration Successful. Please Login to Continue')
 			$location.path('/login')
 		},function(response){//409, 500 error
@@ -13,15 +15,20 @@ app.controller('UserController',function($scope,$rootScope,$location,UserService
 	}
 	
 	$scope.login=function(user){
-		console.log('usercontroller to login'+user)
+		console.log('usercontroller : login')
 		UserService.login(user).then(function(response){
+			console.log('	$rootScope.loggedInUser=response.data')
 			$rootScope.loggedInUser=response.data
+			console.log('$cookieStore.put(currentuser,response.data)')
+			$cookieStore.put('currentuser',response.data)
+			
 			console.log('success'+response.data)
 			$location.path('/home')
+			console.log('$location.path(/home)')
 		}, function(response){
 			console.log('error')
 			$scope.error=response.data
-			$location.path('/login')
+			$location.path('/home')
 			
 		})
 	}

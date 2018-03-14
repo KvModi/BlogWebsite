@@ -16,7 +16,10 @@ app.config(function($routeProvider) {
 		templateUrl:'views/home.html',
 		controller:'UserController'
 	})
-	
+	.when('/edituserprofile',{
+		templateUrl:'views/edituserprofile.html',
+		controller:'UserController'
+	})
 	.when('/addjob',{
 		templateUrl:'views/jobform.html',
 		controller:'JobCtrl'
@@ -26,16 +29,13 @@ app.config(function($routeProvider) {
 		controller:'JobCtrl'
 	})
 	
-	.when('/edituserprofile',{
-		templateUrl:'views/edituserprofile.html',
-		controller:'UserController'
-	})
+	
 	.otherwise({
 		templateUrl:'views/home.html'
 	})
 })
 
-app.run(function ($location,$rootScope,$cookieStore,UserService){
+app.run(function($location,$rootScope,$cookieStore,UserService){
 	if ($rootScope.loggedInUser==undefined)
 		$rootScope.loggedInUser=$cookieStore.get('currentuser')
 		

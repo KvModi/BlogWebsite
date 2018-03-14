@@ -1,14 +1,23 @@
 package com.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table( name="DUSER")
-public class User 
+@Component
+public class User implements Serializable 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String email;
 	@Column(nullable=false)
@@ -16,7 +25,7 @@ public class User
 	@Column(nullable=false)
 	private String firstname;
 	private String lastname;
-	@Column(nullable=false)
+	
 	private String phonenumber;
 	private String role;
 	@Column(name="online_status")
@@ -66,7 +75,7 @@ public class User
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+		
 		return "email: "+this.email+", name: "+this.firstname+" "+this.lastname+", password :"+this.password+", phone: "+this.phonenumber+", role : "+this.role;
 	}
 	

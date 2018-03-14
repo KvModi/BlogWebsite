@@ -3,6 +3,8 @@
 	<name>middleware</name>
 	<comment></comment>
 	<projects>
+		<project>Backend</project>
+		<project>frontend</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -2,8 +2,9 @@
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.model.ErrorClazz;
 import com.model.User;
 
 @Controller
+@ComponentScan("com.*")
 public class UserController {
 	@Autowired
 	private UserDao userDao;
@@ -25,11 +27,11 @@ public class UserController {
 		System.out.println("UserController bean is created");
 	}
 	
-	/*@RequestMapping(value="/home")
+	@RequestMapping(value="/home")
 	public String goToHome() {
 		return "redirect:home.html";
 		
-	}*/
+	}
 	
 	@RequestMapping(value="/registeruser", method=RequestMethod.POST)
 	public ResponseEntity<?> registerUser(@RequestBody User user)
@@ -67,7 +69,8 @@ public class UserController {
 			validUser.setOnline(true);
 			userDao.update(validUser);
 			session.setAttribute("loginId", user.getEmail());
-			return new ResponseEntity<User>(validUser,HttpStatus.OK);
+			System.out.println("UserController : Entering else");			
+			return new ResponseEntity<User>(validUser,HttpStatus.UNAUTHORIZED);
 		}
 	}
 	@RequestMapping(value="/logout",method=RequestMethod.PUT)
